@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Glue:GlueDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Glue="http://www.glueframework.com/activitydiagram/" id="14" location="0,0" size="-1,-1">
+  <child xsi:type="Glue:InitialState" id="82" location="180,40" size="-1,-1" output="//@wire.0"/>
+  <child xsi:type="Glue:Activity" id="83" location="50,100" size="501,-1" input="//@wire.0" output="//@wire.1 //@wire.2 //@wire.3 //@wire.11" name="API 분기">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="84" location="50,190" size="100,-1" input="//@wire.1" output="//@wire.4" name="예약내역-조회">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="findByUserId"/>
+    <property key="repository" value="com.poscoict.cateringpass.jpa.OrderRepository"/>
+    <property key="param-count" value="1"/>
+    <property key="param1" value="userId"/>
+    <property key="result-key" value="orderList"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="85" location="170,190" size="100,-1" input="//@wire.2" output="//@wire.5" name="예약정보생성">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="createOrder"/>
+    <property key="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    <property key="param-count" value="2"/>
+    <property key="param1" value="userId"/>
+    <property key="param2" value="takeOutId"/>
+    <property key="result-key" value="orderId"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="86" location="420,190" size="131,-1" input="//@wire.3" output="//@wire.6" name="예약취소-주문정보">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="getTakeOutId"/>
+    <property key="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    <property key="param-count" value="1"/>
+    <property key="param1" value="orderId"/>
+    <property key="result-key" value="takeOutId"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="94" location="410,260" size="151,-1" input="//@wire.6" output="//@wire.7" name="예약취소-마감여부정보">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="isCancelAvailable"/>
+    <property key="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    <property key="param-count" value="1"/>
+    <property key="param1" value="takeOutId"/>
+    <property key="result-key" value="isClosed"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="97" location="420,330" size="131,-1" input="//@wire.7" output="//@wire.10 //@wire.8" name="예약취소-마감여부">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="ctx-key" value="isClosed"/>
+  </child>
+  <child xsi:type="Glue:FinalState" id="98" location="470,410" size="-1,-1" input="//@wire.9 //@wire.10"/>
+  <child xsi:type="Glue:FinalState" id="99" location="210,260" size="-1,-1" input="//@wire.5 //@wire.12 //@wire.4"/>
+  <child xsi:type="Glue:Activity" id="111" location="180,330" size="151,-1" input="//@wire.8" output="//@wire.9" name="예약취소-주문정보변경">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="cancelOrder"/>
+    <property key="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    <property key="param-count" value="1"/>
+    <property key="param1" value="orderId"/>
+    <property key="result-key" value="isClosed"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="134" location="290,190" size="111,-1" input="//@wire.11" output="//@wire.12" name="테이크아웃 목록">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
+    <property key="method" value="findTakeoutAll"/>
+    <property key="repository" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    <property key="result-key" value="takeoutList"/>
+  </child>
+  <wire id="17" guardcondition="success" firstRelativePoint="169,90" lastRelativePoint="169,136"/>
+  <wire id="18" guardcondition="find" firstRelativePoint="98,130" lastRelativePoint="98,190"/>
+  <wire id="19" guardcondition="add" firstRelativePoint="221,130" lastRelativePoint="221,190"/>
+  <wire id="20" guardcondition="cancel" firstRelativePoint="483,130" lastRelativePoint="483,190"/>
+  <wire id="21" guardcondition="success" firstRelativePoint="94,220" lastRelativePoint="209,269">
+    <bendpoint weight="0.5" firstDimension="-6,64" secondDimension="-126,-1"/>
+  </wire>
+  <wire id="22" guardcondition="success" firstRelativePoint="211,220" lastRelativePoint="211,316"/>
+  <wire id="24" guardcondition="success" firstRelativePoint="481,220" lastRelativePoint="481,260"/>
+  <wire id="25" guardcondition="success" firstRelativePoint="484,290" lastRelativePoint="484,330"/>
+  <wire id="26" guardcondition="open" firstRelativePoint="420,346" lastRelativePoint="331,346"/>
+  <wire id="27" guardcondition="success" firstRelativePoint="257,360" lastRelativePoint="469,419">
+    <bendpoint weight="0.5" firstDimension="2,74" secondDimension="-223,-1"/>
+  </wire>
+  <wire id="28" guardcondition="close" firstRelativePoint="350,360" lastRelativePoint="350,459"/>
+  <wire id="29" guardcondition="success" firstRelativePoint="339,130" lastRelativePoint="339,190"/>
+  <wire id="30" guardcondition="success" firstRelativePoint="345,220" lastRelativePoint="230,269">
+    <bendpoint weight="0.5" firstDimension="0,64" secondDimension="125,-1"/>
+  </wire>
+</Glue:GlueDiagram>

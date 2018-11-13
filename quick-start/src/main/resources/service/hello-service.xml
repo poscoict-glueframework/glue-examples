@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="hello-service" initial="HelloActivity" xmlns="http://www.poscoict.com/glueframework/service">
+    <activity name="HelloActivity" class="sample.activity.HelloActivity">
+        <transition name="success" value="end"/>
+        <property name="belongTo" value="POSCOICT"/>
+    </activity>
+</service>

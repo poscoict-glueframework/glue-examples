@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="order-service" initial="API 분기" xmlns="http://www.poscoict.com/glueframework/service">
+    <activity name="API 분기" class="com.poscoict.glueframework.biz.activity.GlueDefaultRouter">
+        <transition name="add" value="예약정보생성"/>
+        <transition name="cancel" value="예약취소-주문정보"/>
+        <transition name="find" value="예약내역-조회"/>
+        <transition name="success" value="테이크아웃 목록"/>
+    </activity>
+    <activity name="예약내역-조회" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="end"/>
+        <property name="param1" value="userId"/>
+        <property name="repository" value="com.poscoict.cateringpass.jpa.OrderRepository"/>
+        <property name="method" value="findByUserId"/>
+        <property name="param-count" value="1"/>
+        <property name="result-key" value="orderList"/>
+    </activity>
+    <activity name="예약정보생성" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="end"/>
+        <property name="method" value="createOrder"/>
+        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+        <property name="param1" value="userId"/>
+        <property name="param2" value="takeOutId"/>
+        <property name="param-count" value="2"/>
+        <property name="result-key" value="orderId"/>
+    </activity>
+    <activity name="예약취소-주문정보" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="예약취소-마감여부정보"/>
+        <property name="param1" value="orderId"/>
+        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+        <property name="method" value="getTakeOutId"/>
+        <property name="param-count" value="1"/>
+        <property name="result-key" value="takeOutId"/>
+    </activity>
+    <activity name="예약취소-마감여부정보" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="예약취소-마감여부"/>
+        <property name="param1" value="takeOutId"/>
+        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+        <property name="method" value="isCancelAvailable"/>
+        <property name="param-count" value="1"/>
+        <property name="result-key" value="isClosed"/>
+    </activity>
+    <activity name="예약취소-마감여부" class="com.poscoict.glueframework.biz.activity.GlueDefaultRouter">
+        <transition name="close" value="end"/>
+        <transition name="open" value="예약취소-주문정보변경"/>
+        <property name="ctx-key" value="isClosed"/>
+    </activity>
+    <activity name="예약취소-주문정보변경" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="end"/>
+        <property name="param1" value="orderId"/>
+        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+        <property name="method" value="cancelOrder"/>
+        <property name="param-count" value="1"/>
+        <property name="result-key" value="isClosed"/>
+    </activity>
+    <activity name="테이크아웃 목록" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
+        <transition name="success" value="end"/>
+        <property name="result-key" value="takeoutList"/>
+        <property name="method" value="findTakeoutAll"/>
+        <property name="repository" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+    </activity>
+</service>

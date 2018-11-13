@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	function makeReservation(takeOutId) {
+		console.log(document.cookie + "/" + takeOutId);
+		var userId = getCookie("userid");
+		$.post("/cateringpass", {
+			"takeOutId" : takeOutId,
+			"userId" : userId
+		}, function(data) {
+			console.log(data);
+			document.location.href = "메뉴.html";
+		}, "json");
+	}
+</script>
+</head>
+<body onload="getTakeOutList()">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>CATERING PASS</h1>
+			<br>
+			<h2>테이크 아웃 예약하기</h2>
+			<br>
+			<div id="accordion"></div>
+		</div>
+	</div>
+	<script>
+		function getTakeOutList() {
+			console.log(document.cookie);
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					getTakeOutListCallback(this);
+				}
+			};
+			xhttp.open("GET", "/cateringpass", true);
+			xhttp.send();
+		}
+		function getTakeOutListCallback(xhttp) {
+			console.log(xhttp);
+			var list = JSON.parse(xhttp.responseText);
+			console.log(list.length);
+			var html = '';
+			for (i = 0; i < list.length; i++) {
+				var takeOut = list[i];
+				console.log(takeOut);
+				html += '<div class="card">';
+				html += '  <div class="card-header">';
+				html += '    <a class="collapsed card-link" data-toggle="collapse" href="#collapse'+i+'">' + takeOut.dayStr + ' (' + takeOut.dayOfWeek + ') ' + takeOut.menu + '</a>';
+				html += '  </div>';
+				html += '  <div id="collapse'+i+'" class="collapse" data-parent="#accordion">';
+				html += '    <div class="card-body">';
+				html += '      <h3>' + takeOut.location + ' / ' + takeOut.price + '원</h3>';
+				html += '      <img src="'+takeOut.image+'" width="300" />';
+				html += '      <button type="button" class="btn btn-outline-dark" onclick=makeReservation(\"' + takeOut.uuId + '\")>예약하기</button>';
+				html += '    </div>';
+				html += '  </div>';
+				html += '</div>';
+			}
+			document.getElementById("accordion").innerHTML = html;
+		}
+	</script>
+</body>
+</html>
