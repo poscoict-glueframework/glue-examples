@@ -2,3 +2,9 @@ logging:
   level: 
     ROOT: INFO
     com.poscoict: TRACE
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true

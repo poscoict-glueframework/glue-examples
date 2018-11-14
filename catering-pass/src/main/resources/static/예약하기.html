@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -29,7 +30,7 @@
 			"userId" : userId
 		}, function(data) {
 			console.log(data);
-			document.location.href = "¸Ş´º.html";
+			document.location.href = "ë©”ë‰´.html";
 		}, "json");
 	}
 </script>
@@ -39,7 +40,7 @@
 		<div class="jumbotron">
 			<h1>CATERING PASS</h1>
 			<br>
-			<h2>Å×ÀÌÅ© ¾Æ¿ô ¿¹¾àÇÏ±â</h2>
+			<h2>í…Œì´í¬ ì•„ì›ƒ ì˜ˆì•½í•˜ê¸°</h2>
 			<br>
 			<div id="accordion"></div>
 		</div>
@@ -70,9 +71,9 @@
 				html += '  </div>';
 				html += '  <div id="collapse'+i+'" class="collapse" data-parent="#accordion">';
 				html += '    <div class="card-body">';
-				html += '      <h3>' + takeOut.location + ' / ' + takeOut.price + '¿ø</h3>';
+				html += '      <h3>' + takeOut.location + ' / ' + takeOut.price + 'ì›</h3>';
 				html += '      <img src="'+takeOut.image+'" width="300" />';
-				html += '      <button type="button" class="btn btn-outline-dark" onclick=makeReservation(\"' + takeOut.uuId + '\")>¿¹¾àÇÏ±â</button>';
+				html += '      <button type="button" class="btn btn-outline-dark" onclick=makeReservation(\"' + takeOut.uuId + '\")>ì˜ˆì•½í•˜ê¸°</button>';
 				html += '    </div>';
 				html += '  </div>';
 				html += '</div>';

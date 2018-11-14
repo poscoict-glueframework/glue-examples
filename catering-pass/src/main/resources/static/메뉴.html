@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -31,11 +32,11 @@
 			<h2 id="name"></h2>
 			<br>
 			<div class="container">
-				<a href="#" class="btn btn-outline-dark" onclick="goSelect()">Å×ÀÌÅ© ¾Æ¿ô ¿¹¾à</a>
+				<a href="#" class="btn btn-outline-dark" onclick="goSelect()">í…Œì´í¬ ì•„ì›ƒ ì˜ˆì•½</a>
 			</div>
 			<br>
 			<div class="container">
-				<a href="#" class="btn btn-outline-dark" onclick="showMine()">¿¹¾à ³»¿ª º¸±â</a>
+				<a href="#" class="btn btn-outline-dark" onclick="showMine()">ì˜ˆì•½ ë‚´ì—­ ë³´ê¸°</a>
 			</div>
 		</div>
 	</div>
@@ -45,10 +46,10 @@
 			document.getElementById("name").innerHTML = getCookie("ename");
 		}
 		function goSelect() {
-			document.location.href = "¿¹¾àÇÏ±â.html";
+			document.location.href = "ì˜ˆì•½í•˜ê¸°.html";
 		}
 		function showMine() {
-			document.location.href = "È®ÀÎÇÏ±â.html";
+			document.location.href = "í™•ì¸í•˜ê¸°.html";
 		}
 	</script>
 </body>
