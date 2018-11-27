@@ -3,7 +3,6 @@ package sample.activity;
 import org.springframework.stereotype.Component;
 
 import com.poscoict.glueframework.biz.activity.GlueActivity;
-import com.poscoict.glueframework.biz.activity.GlueActivityConstants;
 import com.poscoict.glueframework.context.GlueContext;
 
 @Component
@@ -22,6 +21,6 @@ public class HelloActivity extends GlueActivity<GlueContext> {
 		Object output = "[" + belongTo + "] Hello " + input + "!!!";
 		ctx.put("result", output);
 
-		return GlueActivityConstants.SUCCESS;
+		return SUCCESS;
 	}
 }
