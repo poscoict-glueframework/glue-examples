@@ -17,7 +17,7 @@ public class TakeOutJpo implements Serializable, JsonSerializable {
 	private String uuid;
 	private Date day;
 	private String dayStr;
-	private String dayOfWeek;
+	private String dayOfWeekStr;
 	private String menu;
 	private String location;
 	private String image;
@@ -31,7 +31,7 @@ public class TakeOutJpo implements Serializable, JsonSerializable {
 		this.uuid = Generators.timeBasedGenerator().generate().toString();
 		this.day = day;
 		this.dayStr = new SimpleDateFormat("MM/dd").format(day);
-		this.dayOfWeek = new SimpleDateFormat("E").format(day);
+		this.dayOfWeekStr = new SimpleDateFormat("E").format(day);
 		this.menu = menu;
 		this.location = location;
 		this.price = price;
@@ -53,7 +53,7 @@ public class TakeOutJpo implements Serializable, JsonSerializable {
 	public void setDay(Date day) {
 		this.day = day;
 		this.dayStr = new SimpleDateFormat("MM/dd").format(day);
-		this.dayOfWeek = new SimpleDateFormat("E").format(day);
+		this.dayOfWeekStr = new SimpleDateFormat("E").format(day);
 	}
 
 	public String getMenu() {
@@ -104,11 +104,11 @@ public class TakeOutJpo implements Serializable, JsonSerializable {
 		this.dayStr = dayStr;
 	}
 
-	public String getDayOfWeek() {
-		return dayOfWeek;
+	public String getDayOfWeekStr() {
+		return dayOfWeekStr;
 	}
 
-	public void setDayOfWeek(String dayOfWeek) {
-		this.dayOfWeek = dayOfWeek;
+	public void setDayOfWeekStr(String dayOfWeek) {
+		this.dayOfWeekStr = dayOfWeek;
 	}
 }

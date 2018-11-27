@@ -108,28 +108,30 @@ public class CateringPassController {
 
 	@PostConstruct
 	public void init() {
-		Date date = new Date(System.currentTimeMillis() + 3 * 24 * 60 * 60 * 1000);
-		TakeOutJpo takeOut = new TakeOutJpo(date, "햄에그 샌드위치", "판교식당", 2500);
-		takeOut.setImage("http://recipe.ezmember.co.kr/cache/recipe/2017/04/25/8fc9f731dfe3be74a1ff26a5440b33f91.jpg");
-		takeOutRepository.save(takeOut);
-		takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
-		takeOut.setImage("https://m.dunkindonuts.co.kr/upload/product/1517795541.png");
-		takeOutRepository.save(takeOut);
+		if (takeOutRepository.findAll().isEmpty()) {
+			Date date = new Date(System.currentTimeMillis() + 3 * 24 * 60 * 60 * 1000);
+			TakeOutJpo takeOut = new TakeOutJpo(date, "햄에그 샌드위치", "판교식당", 2500);
+			takeOut.setImage("http://recipe.ezmember.co.kr/cache/recipe/2017/04/25/8fc9f731dfe3be74a1ff26a5440b33f91.jpg");
+			takeOutRepository.save(takeOut);
+			takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
+			takeOut.setImage("https://m.dunkindonuts.co.kr/upload/product/1517795541.png");
+			takeOutRepository.save(takeOut);
 
-		date = new Date(System.currentTimeMillis() + 4 * 24 * 60 * 60 * 1000);
-		takeOut = new TakeOutJpo(date, "크로와상 샌드위치", "판교식당", 2500);
-		takeOut.setImage("http://imagescdn.gettyimagesbank.com/500/201708/jv10965573.jpg");
-		takeOutRepository.save(takeOut);
-		takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
-		takeOut.setImage("https://www.paris.co.kr/data/product/Caesar.jpg");
-		takeOutRepository.save(takeOut);
+			date = new Date(System.currentTimeMillis() + 4 * 24 * 60 * 60 * 1000);
+			takeOut = new TakeOutJpo(date, "크로와상 샌드위치", "판교식당", 2500);
+			takeOut.setImage("http://imagescdn.gettyimagesbank.com/500/201708/jv10965573.jpg");
+			takeOutRepository.save(takeOut);
+			takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
+			takeOut.setImage("https://www.paris.co.kr/data/product/Caesar.jpg");
+			takeOutRepository.save(takeOut);
 
-		date = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
-		takeOut = new TakeOutJpo(date, "클럽 샌드위치", "판교식당", 2500);
-		takeOut.setImage("https://t1.daumcdn.net/cfile/tistory/2573CD4454CB107016");
-		takeOutRepository.save(takeOut);
-		takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
-		takeOut.setImage("https://www.dunkindonuts.co.kr/upload/product/1517795612.png");
-		takeOutRepository.save(takeOut);
+			date = new Date(System.currentTimeMillis() + 5 * 24 * 60 * 60 * 1000);
+			takeOut = new TakeOutJpo(date, "클럽 샌드위치", "판교식당", 2500);
+			takeOut.setImage("https://t1.daumcdn.net/cfile/tistory/2573CD4454CB107016");
+			takeOutRepository.save(takeOut);
+			takeOut = new TakeOutJpo(date, "샐러드", "판교식당", 2500);
+			takeOut.setImage("https://www.dunkindonuts.co.kr/upload/product/1517795612.png");
+			takeOutRepository.save(takeOut);
+		}
 	}
 }

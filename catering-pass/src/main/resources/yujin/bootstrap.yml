@@ -6,4 +6,4 @@ spring:
       uri: http://192.168.41.81:8888
       fail-fast: true
   profiles:
-    active: ${activatedProperties}
+    active: yujin

@@ -59,9 +59,11 @@ public class UserController {
 
 	@PostConstruct
 	public void init() {
-		UserJpo user = new UserJpo("11111", "poscoict", "박재환");
-		userRepository.save(user);
-		user = new UserJpo("22222", "poscoict", "우인재");
-		userRepository.save(user);
+		if (userRepository.findAll().isEmpty()) {
+			UserJpo user = new UserJpo("11111", "poscoict", "박재환");
+			userRepository.save(user);
+			user = new UserJpo("22222", "poscoict", "우인재");
+			userRepository.save(user);
+		}
 	}
 }
