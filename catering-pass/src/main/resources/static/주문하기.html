@@ -22,7 +22,7 @@
 		}
 		return "";
 	}
-	function makeReservation(takeOutId) {
+	function makeOrder(takeOutId) {
 		console.log(document.cookie + "/" + takeOutId);
 		var userId = getCookie("userid");
 		$.post("/cateringpass", {
@@ -73,7 +73,7 @@
 				html += '    <div class="card-body">';
 				html += '      <h3>' + takeOut.location + ' / ' + takeOut.price + '원</h3>';
 				html += '      <img src="'+takeOut.image+'" width="300" />';
-				html += '      <button type="button" class="btn btn-outline-dark" onclick=makeReservation(\"' + takeOut.uuId + '\")>예약하기</button>';
+				html += '      <button type="button" class="btn btn-outline-dark" onclick=makeOrder(\"' + takeOut.uuId + '\")>주문하기</button>';
 				html += '    </div>';
 				html += '  </div>';
 				html += '</div>';
