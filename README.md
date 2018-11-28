@@ -60,6 +60,7 @@ mvn clean package -Pall              # 전체빌드
 mvn clean package -Pquick-start      # quick-start 만 빌드     ( cd quick-start/;mvn package )
 mvn clean package -Pcatering-pass    # catering-pass 만 빌드 ( cd catering-pass/;mvn package ) 
 mvn clean package -Pjob-fcm          # job-fcm 만 빌드              ( cd job-fcm/;mvn package ) 
+mvn clean package -Psaga             # saga-parent 만 빌드     ( cd saga-parent/;mvn package ) 
 ```
 
 ```bash

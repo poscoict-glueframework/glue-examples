@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.poscoict</groupId>
-	<artifactId>glue-example-parent</artifactId>
+	<artifactId>saga-parent</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<build>
@@ -20,57 +20,27 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>default</id>
+			<id>saga</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-		</profile>
-		<profile>
-			<id>all</id>
 			<properties>
 				<maven.test.skip>true</maven.test.skip>
 			</properties>
 			<modules>
-				<module>quick-start</module>
-				<module>catering-pass</module>
-				<module>job-fcm</module>
-				<module>saga-parent</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>quick-start</id>
-			<modules>
-				<module>quick-start</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>catering-pass</id>
-			<modules>
-				<module>catering-pass</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>catering-pass-cloud</id>
-			<modules>
-				<module>catering-pass</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>job-fcm</id>
-			<modules>
-				<module>job-fcm</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>saga</id>
-			<modules>
-				<module>saga-parent</module>
+				<module>catering-pass-order</module>
+				<module>catering-pass-payment</module>
+				<module>catering-pass-stock</module>
+				<module>catering-pass-delivery</module>
 			</modules>
 		</profile>
 		<profile>
 			<id>saga-cloud</id>
 			<modules>
-				<module>saga-parent</module>
+				<module>catering-pass-order</module>
+				<module>catering-pass-payment</module>
+				<module>catering-pass-stock</module>
+				<module>catering-pass-delivery</module>
 			</modules>
 		</profile>
 	</profiles>

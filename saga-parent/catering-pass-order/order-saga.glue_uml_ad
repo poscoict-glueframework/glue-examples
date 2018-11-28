@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Glue:GlueDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Glue="http://www.glueframework.com/activitydiagram/" id="1" location="0,0" size="-1,-1">
+  <child xsi:type="Glue:InitialState" id="135" location="490,10" size="-1,-1" output="//@wire.0"/>
+  <child xsi:type="Glue:Activity" id="137" location="40,60" size="941,-1" input="//@wire.0" output="//@wire.1 //@wire.2 //@wire.3 //@wire.10" name="Orchestrator : 채널분기">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="ctx-key" value="channel-name"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="143" location="190,140" size="201,-1" input="//@wire.1" output="//@wire.4 //@wire.11 //@wire.19" name="Reply 확인 : PaymentService">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="ctx-key" value="channel-message"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="144" location="430,160" size="211,-1" input="//@wire.2" output="//@wire.7 //@wire.5 //@wire.20" name="Reply 확인 : StockService">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="ctx-key" value="channel-message"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="145" location="780,200" size="201,-1" input="//@wire.3" output="//@wire.6 //@wire.8" name="Reply 확인 : DeliveryService">
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="ctx-key" value="channel-message"/>
+  </child>
+  <child xsi:type="Glue:FinalState" id="146" location="660,370" size="-1,-1" input="//@wire.13"/>
+  <child xsi:type="Glue:FinalState" id="148" location="270,490" size="-1,-1" input="//@wire.12"/>
+  <child xsi:type="Glue:FinalState" id="149" location="930,340" size="-1,-1" input="//@wire.6"/>
+  <child xsi:type="Glue:FinalState" id="154" location="110,580" size="-1,-1" input="//@wire.9"/>
+  <child xsi:type="Glue:Activity" id="187" location="40,440" size="141,-1" input="//@wire.10" output="//@wire.14" name="CMD설정:지불">
+    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
+    <property key="command" value="지불"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="188" location="430,440" size="141,-1" input="//@wire.5 //@wire.20" output="//@wire.15" name="CMD생성:지불취소">
+    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
+    <property key="command" value="지불취소"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="190" location="40,510" size="171,-1" input="//@wire.14 //@wire.15" output="//@wire.9" name="μs호출 : PaymentService">
+    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
+    <property key="channel-name" value="payment-channel"/>
+    <property key="destination" value="payment-service"/>
+    <property key="message-key" value="command"/>
+    <property key="param-count" value="5"/>
+    <property key="param1" value="userId"/>
+    <property key="param2" value="takeOutId"/>
+    <property key="param3" value="orderId"/>
+    <property key="param4" value="case"/>
+    <property key="result-key" value="message"/>
+    <property key="param5" value="paymentId"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="192" location="190,410" size="171,-1" input="//@wire.16 //@wire.17" output="//@wire.12" name="μs호출 : StockService">
+    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
+    <property key="channel-name" value="order-channel"/>
+    <property key="destination" value="stock-service"/>
+    <property key="message-key" value="command"/>
+    <property key="param-count" value="6"/>
+    <property key="param1" value="userId"/>
+    <property key="param2" value="takeOutId"/>
+    <property key="param3" value="orderId"/>
+    <property key="param4" value="paymentId"/>
+    <property key="param5" value="case"/>
+    <property key="param6" value="stockId"/>
+    <property key="description" value="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="193" location="590,300" size="171,-1" input="//@wire.18" output="//@wire.13" name="μs호출 : DeliveryService">
+    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
+    <property key="channel-name" value="delivery-channel"/>
+    <property key="destination" value="delivery-service"/>
+    <property key="param-count" value="6"/>
+    <property key="param1" value="userId"/>
+    <property key="param2" value="takeOutId"/>
+    <property key="param3" value="orderId"/>
+    <property key="param4" value="paymentId"/>
+    <property key="param5" value="stockId"/>
+    <property key="message-key" value="command"/>
+    <property key="param6" value="case"/>
+    <property key="description" value="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="195" location="190,340" size="141,-1" input="//@wire.4" output="//@wire.16" name="CMD설정:준비">
+    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
+    <property key="command" value="준비"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="196" location="780,340" size="141,-1" input="//@wire.8" output="//@wire.17" name="CMD생성:준비취소">
+    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
+    <property key="command" value="준비취소"/>
+  </child>
+  <child xsi:type="Glue:Activity" id="197" location="590,230" size="141,-1" input="//@wire.7" output="//@wire.18" name="CMD생성:배송">
+    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
+    <property key="command" value="배송"/>
+  </child>
+  <child xsi:type="Glue:FinalState" id="198" location="207,206" size="-1,-1" input="//@wire.11"/>
+  <child xsi:type="Glue:FinalState" id="237" location="350,340" size="-1,-1" input="//@wire.19"/>
+  <wire id="31" guardcondition="success" firstRelativePoint="213,49" lastRelativePoint="213,108"/>
+  <wire id="33" guardcondition="payment-channel" firstRelativePoint="291,90" lastRelativePoint="291,140"/>
+  <wire id="34" guardcondition="order-channel" firstRelativePoint="529,90" lastRelativePoint="529,170"/>
+  <wire id="35" guardcondition="delivery-channel" firstRelativePoint="879,90" lastRelativePoint="879,200"/>
+  <wire id="37" guardcondition="정상:지불" firstRelativePoint="950,230" lastRelativePoint="950,269"/>
+  <wire id="38" guardcondition="오류:준비" firstRelativePoint="940,230" lastRelativePoint="940,339"/>
+  <wire id="39" guardcondition="정상:배송" firstRelativePoint="548,200" lastRelativePoint="548,510"/>
+  <wire id="40" guardcondition="정상:준비" firstRelativePoint="879,90" lastRelativePoint="879,200"/>
+  <wire id="42" guardcondition="오류:배송" firstRelativePoint="825,230" lastRelativePoint="825,340"/>
+  <wire id="46" guardcondition="success" firstRelativePoint="110,490" lastRelativePoint="110,569"/>
+  <wire id="47" guardcondition="success" firstRelativePoint="107,90" lastRelativePoint="107,450"/>
+  <wire id="49" guardcondition="오류:지불" firstRelativePoint="266,170" lastRelativePoint="266,350"/>
+  <wire id="50" guardcondition="success" firstRelativePoint="260,370" lastRelativePoint="260,429"/>
+  <wire id="51" guardcondition="success" firstRelativePoint="580,390" lastRelativePoint="580,419"/>
+  <wire id="52" guardcondition="success" firstRelativePoint="105,430" lastRelativePoint="105,460"/>
+  <wire id="53" guardcondition="success" firstRelativePoint="498,470" lastRelativePoint="211,525">
+    <bendpoint weight="0.5" firstDimension="-2,70" secondDimension="373,0"/>
+  </wire>
+  <wire id="54" guardcondition="success" firstRelativePoint="260,340" lastRelativePoint="260,370"/>
+  <wire id="55" guardcondition="success" firstRelativePoint="851,390" lastRelativePoint="361,433">
+    <bendpoint weight="0.5" firstDimension="1,58" secondDimension="576,-2"/>
+  </wire>
+  <wire id="56" guardcondition="success" firstRelativePoint="569,320" lastRelativePoint="569,350"/>
+  <wire id="57" guardcondition="정상:지불취소" firstRelativePoint="335,170" lastRelativePoint="335,265"/>
+  <wire id="58" guardcondition="정상:준비취소" firstRelativePoint="463,190" lastRelativePoint="463,440"/>
+</Glue:GlueDiagram>

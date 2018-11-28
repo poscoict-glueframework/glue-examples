@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: saga-order-api
+  cloud:
+    config:
+      uri: ${configServerUri}
+      fail-fast: true
+  profiles:
+    active: ${activatedProperties}

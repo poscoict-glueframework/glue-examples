@@ -2,7 +2,7 @@
 
 2개의 profile 사용가능합니다.
 - catering-pass
-- catering-pass-yujin
+- catering-pass-cloud
 
 ## how to build
 
