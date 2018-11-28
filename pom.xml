@@ -43,13 +43,13 @@
 			</modules>
 		</profile>
 		<profile>
-			<id>catering-pass-local</id>
+			<id>catering-pass</id>
 			<modules>
 				<module>catering-pass</module>
 			</modules>
 		</profile>
 		<profile>
-			<id>catering-pass-yujin</id>
+			<id>catering-pass-cloud</id>
 			<modules>
 				<module>catering-pass</module>
 			</modules>

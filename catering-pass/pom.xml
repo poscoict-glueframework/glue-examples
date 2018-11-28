@@ -24,7 +24,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
-		<spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+		<spring.boot.version>2.0.6.RELEASE</spring.boot.version>
 		<spring.cloud.version>Finchley.SR2</spring.cloud.version>
 		<springfox.swagger.version>2.9.2</springfox.swagger.version>
 	</properties>
@@ -117,7 +117,7 @@
 				<configuration>
 					<profiles>
 						<profile>local</profile>
-						<profile>yujin</profile>
+						<profile>cloud</profile>
 					</profiles>
 				</configuration>
 			</plugin>
@@ -125,7 +125,7 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>catering-pass-local</id>
+			<id>catering-pass</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -134,9 +134,9 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>catering-pass-yujin</id>
+			<id>catering-pass-cloud</id>
 			<properties>
-				<env>yujin</env>
+				<env>cloud</env>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -155,6 +155,9 @@
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
+			<build>
+				<finalName>${project.artifactId}-api</finalName>
+			</build>
 		</profile>
 	</profiles>
 </project>
