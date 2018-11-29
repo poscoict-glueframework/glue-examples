@@ -19,7 +19,7 @@ public class DeliveryJpo implements JsonSerializable {
 	public DeliveryJpo(String orderId) {
 		this.uuid = Generators.timeBasedGenerator().generate().toString();
 		this.orderId = orderId;
-		this.status = "접수";
+		this.status = "init";
 	}
 
 	public String getUuid() {

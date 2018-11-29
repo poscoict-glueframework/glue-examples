@@ -29,30 +29,37 @@ public class ReplyReceiver {
 
 	@JmsListener(destination = "order-service")
 	public void receiveReplyMessage(Map<String, Object> message) throws InterruptedException {
+		this.logger.info("");
+		this.logger.info("");
+		this.logger.info("");
+		this.logger.info("##### [Order Saga] #####");
+		System.out.println("received : " + message.entrySet());
 		Thread.sleep(2000);
-		System.out.println("received");
-		System.out.println(message.entrySet());
-		if ("reply-channel".equals(message.get("channel"))) {
 
-			Optional<OrderJpo> value = this.orderRepository.findById((String) message.get("orderId"));
-			if (value.isPresent()) {
-				OrderJpo orderJpo = value.get();
-				orderJpo.setStatus((String) message.get("channel-message"));
-				orderRepository.save(orderJpo);
-				OrderHistoryJpo orderHistoryJpo = new OrderHistoryJpo(orderJpo);
-				orderHistoryJpo.setReceivedMessage("" + message.entrySet());
-				this.orderHistoryRepository.save(orderHistoryJpo);
-			}
+		Optional<OrderJpo> value = this.orderRepository.findById((String) message.get("orderId"));
+		if (value.isPresent()) {
+			OrderJpo orderJpo = value.get();
+			orderJpo.setStatus((String) message.get("channel-message") + " Reply 수신");
+			orderRepository.save(orderJpo);
+			OrderHistoryJpo orderHistoryJpo = new OrderHistoryJpo(orderJpo);
+			orderHistoryJpo.setReceivedMessage("" + message.entrySet());
+			this.orderHistoryRepository.save(orderHistoryJpo);
 
-			this.logger.info("##### [Order Saga] Reply를 확인합니다. ");
 			GlueContext ctx = new GlueDefaultContext("order-saga-service");
 			ctx.putAll(message);
 			ctx.put("channel-name", message.get("source-channel"));
 			bizController.doAction(ctx);
-			this.logger.info("#####");
-			this.logger.info("");
-			this.logger.info("");
-			this.logger.info("");
+
+			if (ctx.containsKey("jms-message")) {
+				@SuppressWarnings("unchecked")
+				Map<String, Object> result = (Map<String, Object>) ctx.get("jms-message");
+				orderJpo.setStatus(result.get("command") + " CMD 보냄");
+				this.orderRepository.save(orderJpo);
+				orderHistoryJpo = new OrderHistoryJpo(orderJpo);
+				this.orderHistoryRepository.save(orderHistoryJpo);
+			}
 		}
+
+		this.logger.info("##### [Order Saga] #####");
 	}
 }

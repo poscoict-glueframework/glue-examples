@@ -23,7 +23,7 @@ public class OrderJpo implements JsonSerializable {
 		this.uuid = Generators.timeBasedGenerator().generate().toString();
 		this.userId = userId;
 		this.takeOutId = takeOutId;
-		this.status = "주문접수";
+		this.status = "init";
 		this.orderQuantity = "1";
 	}
 

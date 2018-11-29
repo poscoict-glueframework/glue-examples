@@ -37,39 +37,41 @@
         <property name="param1" value="userId"/>
         <property name="channel-name" value="payment-channel"/>
         <property name="param2" value="takeOutId"/>
+        <property name="channal-cmd-key" value="command"/>
         <property name="param3" value="orderId"/>
         <property name="param4" value="case"/>
         <property name="param5" value="paymentId"/>
-        <property name="message-key" value="command"/>
         <property name="destination" value="payment-service"/>
         <property name="param-count" value="5"/>
-        <property name="result-key" value="message"/>
+        <property name="result-key" value="jms-message"/>
     </activity>
     <activity name="μs호출 : StockService" class="com.poscoict.cateringpass.activity.SendCommandToMessageBroker">
         <transition name="success" value="end"/>
         <property name="param1" value="userId"/>
         <property name="channel-name" value="order-channel"/>
         <property name="param2" value="takeOutId"/>
+        <property name="channal-cmd-key" value="command"/>
         <property name="param3" value="orderId"/>
         <property name="param4" value="paymentId"/>
         <property name="param5" value="case"/>
-        <property name="message-key" value="command"/>
         <property name="param6" value="stockId"/>
         <property name="destination" value="stock-service"/>
         <property name="param-count" value="6"/>
+        <property name="result-key" value="jms-message"/>
     </activity>
     <activity name="μs호출 : DeliveryService" class="com.poscoict.cateringpass.activity.SendCommandToMessageBroker">
         <transition name="success" value="end"/>
         <property name="param1" value="userId"/>
-        <property name="param2" value="takeOutId"/>
         <property name="channel-name" value="delivery-channel"/>
+        <property name="param2" value="takeOutId"/>
+        <property name="channal-cmd-key" value="command"/>
         <property name="param3" value="orderId"/>
         <property name="param4" value="paymentId"/>
         <property name="param5" value="stockId"/>
-        <property name="message-key" value="command"/>
         <property name="param6" value="case"/>
         <property name="destination" value="delivery-service"/>
         <property name="param-count" value="6"/>
+        <property name="result-key" value="jms-message"/>
     </activity>
     <activity name="CMD설정:준비" class="com.poscoict.cateringpass.activity.CreateCommand">
         <transition name="success" value="μs호출 : StockService"/>

@@ -7,9 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import com.fasterxml.uuid.Generators;
+import com.poscoict.glueframework.util.JsonSerializable;
 
 @Entity(name = "OrderTransactionJpo")
-public class OrderHistoryJpo {
+public class OrderHistoryJpo implements JsonSerializable {
 	@Id
 	private String uuid;
 	private String orderId;// OrderJpo의 ID

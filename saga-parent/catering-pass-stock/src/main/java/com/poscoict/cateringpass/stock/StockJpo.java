@@ -20,7 +20,7 @@ public class StockJpo implements JsonSerializable {
 	public StockJpo(String orderId) {
 		this.uuid = Generators.timeBasedGenerator().generate().toString();
 		this.orderId = orderId;
-		this.status = "준비";
+		this.status = "init";
 	}
 
 	public String getUuid() {

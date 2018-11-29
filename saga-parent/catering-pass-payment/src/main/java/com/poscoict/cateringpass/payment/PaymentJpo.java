@@ -20,7 +20,7 @@ public class PaymentJpo implements JsonSerializable {
 	public PaymentJpo(String orderId) {
 		this.uuid = Generators.timeBasedGenerator().generate().toString();
 		this.orderId = orderId;
-		this.status = "지불";
+		this.status = "init";
 	}
 
 	public String getUuid() {

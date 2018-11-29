@@ -32,7 +32,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.poscoict.glueframework</groupId>
-			<artifactId>glue-core</artifactId>
+			<artifactId>glue-util</artifactId>
 			<version>5.1.0-RELEASE</version>
 		</dependency>
 		<dependency>

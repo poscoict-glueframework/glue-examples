@@ -6,9 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.fasterxml.uuid.Generators;
+import com.poscoict.glueframework.util.JsonSerializable;
 
 @Entity(name = "StockHistoryJpo")
-public class StockHistoryJpo {
+public class StockHistoryJpo implements JsonSerializable {
 	@Id
 	private String uuid;
 	private String stockId;
