@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service name="order-service" initial="API 분기" xmlns="http://www.poscoict.com/glueframework/service">
-    <activity name="API 분기" class="com.poscoict.glueframework.biz.activity.GlueDefaultRouter">
+    <activity name="API 분기" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
         <transition name="add" value="예약정보생성"/>
         <transition name="cancel" value="예약취소-주문정보"/>
         <transition name="find" value="예약내역-조회"/>
@@ -16,12 +16,12 @@
     </activity>
     <activity name="예약정보생성" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
         <transition name="success" value="end"/>
-        <property name="method" value="createOrder"/>
-        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
         <property name="param1" value="userId"/>
         <property name="param2" value="takeOutId"/>
-        <property name="param-count" value="2"/>
         <property name="result-key" value="orderId"/>
+        <property name="store" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
+        <property name="method" value="createOrder"/>
+        <property name="param-count" value="2"/>
     </activity>
     <activity name="예약취소-주문정보" class="com.poscoict.glueframework.biz.activity.GlueJpaActivity">
         <transition name="success" value="예약취소-마감여부정보"/>
@@ -39,7 +39,7 @@
         <property name="param-count" value="1"/>
         <property name="result-key" value="isClosed"/>
     </activity>
-    <activity name="예약취소-마감여부" class="com.poscoict.glueframework.biz.activity.GlueDefaultRouter">
+    <activity name="예약취소-마감여부" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
         <transition name="close" value="end"/>
         <transition name="open" value="예약취소-주문정보변경"/>
         <property name="ctx-key" value="isClosed"/>

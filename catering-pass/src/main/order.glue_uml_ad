@@ -2,7 +2,7 @@
 <Glue:GlueDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Glue="http://www.glueframework.com/activitydiagram/" id="14" location="0,0" size="-1,-1">
   <child xsi:type="Glue:InitialState" id="82" location="180,40" size="-1,-1" output="//@wire.0"/>
   <child xsi:type="Glue:Activity" id="83" location="50,100" size="501,-1" input="//@wire.0" output="//@wire.1 //@wire.2 //@wire.3 //@wire.11" name="API 분기">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
   </child>
   <child xsi:type="Glue:Activity" id="84" location="50,190" size="100,-1" input="//@wire.1" output="//@wire.4" name="예약내역-조회">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
@@ -38,7 +38,7 @@
     <property key="result-key" value="isClosed"/>
   </child>
   <child xsi:type="Glue:Activity" id="97" location="420,330" size="131,-1" input="//@wire.7" output="//@wire.10 //@wire.8" name="예약취소-마감여부">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
     <property key="ctx-key" value="isClosed"/>
   </child>
   <child xsi:type="Glue:FinalState" id="98" location="470,410" size="-1,-1" input="//@wire.9 //@wire.10"/>

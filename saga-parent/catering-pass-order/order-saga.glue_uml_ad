@@ -2,19 +2,19 @@
 <Glue:GlueDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Glue="http://www.glueframework.com/activitydiagram/" id="1" location="0,0" size="-1,-1">
   <child xsi:type="Glue:InitialState" id="135" location="490,10" size="-1,-1" output="//@wire.0"/>
   <child xsi:type="Glue:Activity" id="137" location="40,60" size="941,-1" input="//@wire.0" output="//@wire.1 //@wire.2 //@wire.3 //@wire.10" name="Orchestrator : 채널분기">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
     <property key="ctx-key" value="channel-name"/>
   </child>
   <child xsi:type="Glue:Activity" id="143" location="190,140" size="201,-1" input="//@wire.1" output="//@wire.11 //@wire.19 //@wire.4" name="Reply 확인 : PaymentService">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
     <property key="ctx-key" value="channel-message"/>
   </child>
   <child xsi:type="Glue:Activity" id="144" location="430,160" size="211,-1" input="//@wire.2" output="//@wire.7 //@wire.5 //@wire.20" name="Reply 확인 : StockService">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
     <property key="ctx-key" value="channel-message"/>
   </child>
   <child xsi:type="Glue:Activity" id="145" location="780,200" size="201,-1" input="//@wire.3" output="//@wire.6 //@wire.8" name="Reply 확인 : DeliveryService">
-    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueDefaultRouter"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
     <property key="ctx-key" value="channel-message"/>
   </child>
   <child xsi:type="Glue:FinalState" id="146" location="660,370" size="-1,-1" input="//@wire.13"/>
@@ -22,12 +22,14 @@
   <child xsi:type="Glue:FinalState" id="149" location="930,340" size="-1,-1" input="//@wire.6"/>
   <child xsi:type="Glue:FinalState" id="154" location="110,580" size="-1,-1" input="//@wire.9"/>
   <child xsi:type="Glue:Activity" id="187" location="40,440" size="141,-1" input="//@wire.10" output="//@wire.14" name="CMD설정:지불">
-    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
-    <property key="command" value="지불"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param1" value="command::지불"/>
+    <property key="param-count" value="1"/>
   </child>
   <child xsi:type="Glue:Activity" id="188" location="430,440" size="141,-1" input="//@wire.5 //@wire.20" output="//@wire.15" name="CMD생성:지불취소">
-    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
-    <property key="command" value="지불취소"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param1" value="command::지불취소"/>
+    <property key="param-count" value="1"/>
   </child>
   <child xsi:type="Glue:Activity" id="190" location="40,510" size="171,-1" input="//@wire.14 //@wire.15" output="//@wire.9" name="μs호출 : PaymentService">
     <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
@@ -73,16 +75,19 @@
     <property key="description" value="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
   </child>
   <child xsi:type="Glue:Activity" id="195" location="190,340" size="141,-1" input="//@wire.4" output="//@wire.16" name="CMD설정:준비">
-    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
-    <property key="command" value="준비"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param1" value="command::준비"/>
+    <property key="param-count" value="1"/>
   </child>
   <child xsi:type="Glue:Activity" id="196" location="780,340" size="141,-1" input="//@wire.8" output="//@wire.17" name="CMD생성:준비취소">
-    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
-    <property key="command" value="준비취소"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param1" value="command::준비취소"/>
+    <property key="param-count" value="1"/>
   </child>
   <child xsi:type="Glue:Activity" id="197" location="590,230" size="141,-1" input="//@wire.7" output="//@wire.18" name="CMD생성:배송">
-    <property key="class" value="com.poscoict.cateringpass.activity.CreateCommand"/>
-    <property key="command" value="배송"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param1" value="command::배송"/>
+    <property key="param-count" value="1"/>
   </child>
   <child xsi:type="Glue:FinalState" id="198" location="190,210" size="-1,-1" input="//@wire.11"/>
   <child xsi:type="Glue:FinalState" id="237" location="350,340" size="-1,-1" input="//@wire.19"/>
