@@ -3,6 +3,7 @@
   <child xsi:type="Glue:InitialState" id="82" location="180,40" size="-1,-1" output="//@wire.0"/>
   <child xsi:type="Glue:Activity" id="83" location="50,100" size="501,-1" input="//@wire.0" output="//@wire.1 //@wire.2 //@wire.3 //@wire.11" name="API 분기">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRouterActivity"/>
+    <property key="description" value="REST API 는 다음과 같습니다. &#xD;&#xA;&#xD;&#xA;1. 테이크아웃목록조회&#xD;&#xA;GET   /cateringpass     &#xD;&#xA;&#xD;&#xA;2. 예약내역조회&#xD;&#xA;GET   /cateringpass/{userId}    &#xD;&#xA;&#xD;&#xA;3. 테이크아웃예약&#xD;&#xA;POST /cateringpass&#xD;&#xA;&#xD;&#xA;4. 예약취소&#xD;&#xA;PUT   /catringpass/{orderId}    "/>
   </child>
   <child xsi:type="Glue:Activity" id="84" location="50,190" size="100,-1" input="//@wire.1" output="//@wire.4" name="예약내역-조회">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
@@ -11,6 +12,7 @@
     <property key="param-count" value="1"/>
     <property key="param1" value="userId"/>
     <property key="result-key" value="orderList"/>
+    <property key="description" value="이 Activity에서는 테이크아웃 예약내역을 조회합니다. &#xD;&#xA;- REST API 에서 userId는 PathVariable로 주어집니다."/>
   </child>
   <child xsi:type="Glue:Activity" id="85" location="170,190" size="100,-1" input="//@wire.2" output="//@wire.5" name="예약정보생성">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
@@ -20,6 +22,7 @@
     <property key="param1" value="userId"/>
     <property key="param2" value="takeOutId"/>
     <property key="result-key" value="orderId"/>
+    <property key="description" value="이 Activity에서는 예약정보를 생성합니다. &#xD;&#xA;- REST API에서 userId, tableOutId는 RequestParam 정보로 전달됩니다."/>
   </child>
   <child xsi:type="Glue:Activity" id="86" location="420,190" size="131,-1" input="//@wire.3" output="//@wire.6" name="예약취소-주문정보">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueJpaActivity"/>
@@ -57,6 +60,7 @@
     <property key="repository" value="com.poscoict.cateringpass.jpa.CateringPassStore"/>
     <property key="result-key" value="takeoutList"/>
   </child>
+  <property key="description" value="catering pass 의 예약서비스입니다. &#xD;&#xA;&#xD;&#xA;테이크아웃예약, 예약내역 등의 비지니스 Flow를 나타냅니다. &#xD;&#xA;&#xD;&#xA;REST API 환경의 서버에서 실행되는 자바로직입니다.&#xD;&#xA;&#xD;&#xA;com.poscoict.cateringpass.CateringPassController 를 확인하세요.&#xD;&#xA;"/>
   <wire id="17" guardcondition="success" firstRelativePoint="169,90" lastRelativePoint="169,136"/>
   <wire id="18" guardcondition="find" firstRelativePoint="98,130" lastRelativePoint="98,190"/>
   <wire id="19" guardcondition="add" firstRelativePoint="221,130" lastRelativePoint="221,190"/>

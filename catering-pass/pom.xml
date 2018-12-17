@@ -157,6 +157,31 @@
 			</dependencyManagement>
 			<build>
 				<finalName>${project.artifactId}-api</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>clean</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${basedir}/src/main/resources/cloud</outputDirectory>
+									<resources>
+										<resources>
+											<directory>${basedir}/src/main/resources/local</directory>
+											<includes>
+												<include>service/**</include>
+											</includes>
+										</resources>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
