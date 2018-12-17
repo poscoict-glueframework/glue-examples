@@ -1,3 +1,8 @@
+job-fcm/src/main/resources/*.json
+saga-parent/catering-pass-delivery/application.yml
+saga-parent/catering-pass-order/application.yml
+saga-parent/catering-pass-payment/application.yml
+saga-parent/catering-pass-stock/application.yml
 /target/
 /bin/
 mvnw
