@@ -1,0 +1,20 @@
+server:
+  port: 8081
+logging:
+  level: 
+    ROOT: INFO
+    com.poscoict: TRACE
+    org.springframework.boot.web.embedded.tomcat.TomcatWebServer: INFO
+spring:
+  application:
+    name: sleuth-order-api
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    baseUrl: http://192.168.41.81:9411
+    sender:
+      type: web
+sample:
+  zipkin:
+    enabled: true

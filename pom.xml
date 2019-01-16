@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.poscoict</groupId>
 	<artifactId>glue-example-parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.2.0</version>
 	<packaging>pom</packaging>
 	<build>
 		<plugins>
@@ -71,6 +71,18 @@
 			<id>saga-cloud</id>
 			<modules>
 				<module>saga-parent</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>sleuth</id>
+			<modules>
+				<module>sleuth-parent</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>sleuth-cloud</id>
+			<modules>
+				<module>sleuth-parent</module>
 			</modules>
 		</profile>
 	</profiles>

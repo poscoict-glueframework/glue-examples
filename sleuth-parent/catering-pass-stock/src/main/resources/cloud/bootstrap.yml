@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sleuth-stock-api
+  cloud:
+    config:
+      uri: http://192.168.41.81:8888
+      fail-fast: true
+  profiles:
+    active: local
