@@ -2,17 +2,35 @@ server:
   port: 8082
 logging:
   level: 
-    ROOT: INFO
+    ROOT: WARN
     com.poscoict: TRACE
     org.springframework.boot.web.embedded.tomcat.TomcatWebServer: INFO
 spring:
   application:
     name: sleuth-payment-api
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: cateringPayment
+          content-type: application/json
+        output:
+          destination: cateringOrder
+          content-type: application/json
+      kafka:
+        binder:
+          zk-nodes: localhost:2181
+          brokers: localhost:9092
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9092
+#      properties:
+#        metadata.broker.list: localhost:9092
   sleuth:
     sampler:
       probability: 1.0
   zipkin:
-    baseUrl: http://192.168.41.81:9411
+    baseUrl: http://localhost:9411
     sender:
       type: web
 sample:

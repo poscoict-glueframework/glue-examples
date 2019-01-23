@@ -23,77 +23,85 @@
   <child xsi:type="Glue:FinalState" id="154" location="110,580" size="-1,-1" input="//@wire.9"/>
   <child xsi:type="Glue:Activity" id="187" location="40,440" size="141,-1" input="//@wire.10" output="//@wire.14" name="CMD설정:지불">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param-count" value="2"/>
     <property key="param1" value="command::지불"/>
-    <property key="param-count" value="1"/>
+    <property key="param2" value="channel::payment-channel"/>
   </child>
   <child xsi:type="Glue:Activity" id="188" location="430,440" size="141,-1" input="//@wire.5 //@wire.20" output="//@wire.15" name="CMD생성:지불취소">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param-count" value="2"/>
     <property key="param1" value="command::지불취소"/>
-    <property key="param-count" value="1"/>
+    <property key="param2" value="channel::payment-channel"/>
   </child>
   <child xsi:type="Glue:Activity" id="190" location="40,510" size="171,-1" input="//@wire.14 //@wire.15" output="//@wire.9" name="μs호출 : PaymentService">
-    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
-    <property key="channal-cmd-key" value="command"/>
-    <property key="channel-name" value="payment-channel"/>
-    <property key="destination" value="payment-service"/>
-    <property key="param-count" value="5"/>
-    <property key="param1" value="userId"/>
-    <property key="param2" value="takeOutId"/>
-    <property key="param3" value="orderId"/>
-    <property key="param4" value="case"/>
-    <property key="param5" value="paymentId"/>
-    <property key="result-key" value="jms-message"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRestClientActivity"/>
+    <property key="method" value="POST"/>
+    <property key="uri" value="payment-uri"/>
+    <property key="param-count" value="7"/>
+    <property key="param1" value="command"/>
+    <property key="param2" value="channel"/>
+    <property key="param3" value="userId"/>
+    <property key="param4" value="takeOutId"/>
+    <property key="param5" value="orderId"/>
+    <property key="param6" value="case"/>
+    <property key="param7" value="paymentId"/>
+    <property key="result-key" value="response"/>
   </child>
   <child xsi:type="Glue:Activity" id="192" location="190,410" size="171,-1" input="//@wire.16 //@wire.17" output="//@wire.12" name="μs호출 : StockService">
-    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
-    <property key="channel-name" value="order-channel"/>
-    <property key="destination" value="stock-service"/>
-    <property key="channal-cmd-key" value="command"/>
-    <property key="param-count" value="6"/>
-    <property key="param1" value="userId"/>
-    <property key="param2" value="takeOutId"/>
-    <property key="param3" value="orderId"/>
-    <property key="param4" value="paymentId"/>
-    <property key="param5" value="case"/>
-    <property key="param6" value="stockId"/>
-    <property key="result-key" value="jms-message"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRestClientActivity"/>
+    <property key="method" value="POST"/>
+    <property key="uri" value="stock-uri"/>
+    <property key="param-count" value="8"/>
+    <property key="param1" value="command"/>
+    <property key="param2" value="channel"/>
+    <property key="param3" value="userId"/>
+    <property key="param4" value="takeOutId"/>
+    <property key="param5" value="orderId"/>
+    <property key="param6" value="paymentId"/>
+    <property key="param7" value="case"/>
+    <property key="param8" value="stockId"/>
+    <property key="result-key" value="response"/>
     <property key="description" value="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
   </child>
   <child xsi:type="Glue:Activity" id="193" location="590,300" size="171,-1" input="//@wire.18" output="//@wire.13" name="μs호출 : DeliveryService">
-    <property key="class" value="com.poscoict.cateringpass.activity.SendCommandToMessageBroker"/>
-    <property key="channel-name" value="delivery-channel"/>
-    <property key="destination" value="delivery-service"/>
-    <property key="channal-cmd-key" value="command"/>
-    <property key="param-count" value="6"/>
-    <property key="param1" value="userId"/>
-    <property key="param2" value="takeOutId"/>
-    <property key="param3" value="orderId"/>
-    <property key="param4" value="paymentId"/>
-    <property key="param5" value="stockId"/>
-    <property key="param6" value="case"/>
-    <property key="result-key" value="jms-message"/>
+    <property key="class" value="com.poscoict.glueframework.biz.activity.GlueRestClientActivity"/>
+    <property key="method" value="POST"/>
+    <property key="uri" value="delivery-uri"/>
+    <property key="param-count" value="8"/>
+    <property key="param1" value="command"/>
+    <property key="param2" value="channel"/>
+    <property key="param3" value="userId"/>
+    <property key="param4" value="takeOutId"/>
+    <property key="param5" value="orderId"/>
+    <property key="param6" value="paymentId"/>
+    <property key="param7" value="stockId"/>
+    <property key="param8" value="case"/>
+    <property key="result-key" value="response"/>
     <property key="description" value="&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
   </child>
   <child xsi:type="Glue:Activity" id="195" location="190,340" size="141,-1" input="//@wire.4" output="//@wire.16" name="CMD설정:준비">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param-count" value="2"/>
     <property key="param1" value="command::준비"/>
-    <property key="param-count" value="1"/>
+    <property key="param2" value="channel::stock-channel"/>
   </child>
   <child xsi:type="Glue:Activity" id="196" location="780,340" size="141,-1" input="//@wire.8" output="//@wire.17" name="CMD생성:준비취소">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param-count" value="2"/>
     <property key="param1" value="command::준비취소"/>
-    <property key="param-count" value="1"/>
+    <property key="param2" value="channel::stock-channel"/>
   </child>
   <child xsi:type="Glue:Activity" id="197" location="590,230" size="141,-1" input="//@wire.7" output="//@wire.18" name="CMD생성:배송">
     <property key="class" value="com.poscoict.glueframework.biz.activity.GlueInitParamActivity"/>
+    <property key="param-count" value="2"/>
     <property key="param1" value="command::배송"/>
-    <property key="param-count" value="1"/>
+    <property key="param2" value="channel::delivery-channel"/>
   </child>
   <child xsi:type="Glue:FinalState" id="198" location="190,210" size="-1,-1" input="//@wire.11"/>
   <child xsi:type="Glue:FinalState" id="237" location="350,340" size="-1,-1" input="//@wire.19"/>
   <wire id="31" guardcondition="success" firstRelativePoint="213,49" lastRelativePoint="213,108"/>
   <wire id="33" guardcondition="payment-channel" firstRelativePoint="291,90" lastRelativePoint="291,140"/>
-  <wire id="34" guardcondition="order-channel" firstRelativePoint="529,90" lastRelativePoint="529,170"/>
+  <wire id="34" guardcondition="stock-channel" firstRelativePoint="659,260" lastRelativePoint="659,300"/>
   <wire id="35" guardcondition="delivery-channel" firstRelativePoint="879,90" lastRelativePoint="879,200"/>
   <wire id="37" guardcondition="정상:지불" firstRelativePoint="257,170" lastRelativePoint="257,340"/>
   <wire id="38" guardcondition="오류:준비" firstRelativePoint="940,230" lastRelativePoint="940,339"/>

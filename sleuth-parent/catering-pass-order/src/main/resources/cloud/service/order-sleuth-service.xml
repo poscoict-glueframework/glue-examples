@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="order-sleuth-service" initial="Orchestrator : 채널분기" xmlns="http://www.poscoict.com/glueframework/service">
+    <activity name="Orchestrator : 채널분기" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
+        <transition name="success" value="CMD설정:지불"/>
+        <transition name="payment-channel" value="Reply 확인 : PaymentService"/>
+        <transition name="stock-channel" value="Reply 확인 : StockService"/>
+        <transition name="delivery-channel" value="Reply 확인 : DeliveryService"/>
+        <property name="ctx-key" value="channel-name"/>
+    </activity>
+    <activity name="Reply 확인 : PaymentService" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
+        <transition name="정상:지불" value="CMD설정:준비"/>
+        <transition name="오류:지불" value="end"/>
+        <transition name="정상:지불취소" value="end"/>
+        <property name="ctx-key" value="channel-message"/>
+    </activity>
+    <activity name="Reply 확인 : StockService" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
+        <transition name="정상:준비취소" value="CMD생성:지불취소"/>
+        <transition name="오류:준비" value="CMD생성:지불취소"/>
+        <transition name="정상:준비" value="CMD생성:배송"/>
+        <property name="ctx-key" value="channel-message"/>
+    </activity>
+    <activity name="Reply 확인 : DeliveryService" class="com.poscoict.glueframework.biz.activity.GlueRouterActivity">
+        <transition name="정상:배송" value="end"/>
+        <transition name="오류:배송" value="CMD생성:준비취소"/>
+        <property name="ctx-key" value="channel-message"/>
+    </activity>
+    <activity name="CMD설정:지불" class="com.poscoict.glueframework.biz.activity.GlueInitParamActivity">
+        <transition name="success" value="μs호출 : PaymentService"/>
+        <property name="param1" value="command::지불"/>
+        <property name="param2" value="channel::payment-channel"/>
+        <property name="param-count" value="2"/>
+    </activity>
+    <activity name="CMD생성:지불취소" class="com.poscoict.glueframework.biz.activity.GlueInitParamActivity">
+        <transition name="success" value="μs호출 : PaymentService"/>
+        <property name="param1" value="command::지불취소"/>
+        <property name="param2" value="channel::payment-channel"/>
+        <property name="param-count" value="2"/>
+    </activity>
+    <activity name="μs호출 : PaymentService" class="com.poscoict.glueframework.biz.activity.GlueRestClientActivity">
+        <transition name="success" value="end"/>
+        <property name="method" value="POST"/>
+        <property name="param1" value="command"/>
+        <property name="param2" value="channel"/>
+        <property name="param3" value="userId"/>
+        <property name="param4" value="takeOutId"/>
+        <property name="param5" value="orderId"/>
+        <property name="param6" value="case"/>
+        <property name="param7" value="paymentId"/>
+        <property name="uri" value="payment-uri"/>
+        <property name="param-count" value="7"/>
+        <property name="result-key" value="response"/>
+    </activity>
+    <activity name="μs호출 : StockService" class="com.poscoict.glueframework.biz.activity.GlueRestClientActivity">
+        <transition name="success" value="end"/>
+        <property name="method" value="POST"/>
+        <property name="param1" value="command"/>
+        <property name="param2" value="channel"/>
+        <property name="param3" value="userId"/>
+        <property name="param4" value="takeOutId"/>
+        <property name="param5" value="orderId"/>
+        <property name="param6" value="paymentId"/>
+        <property name="param7" value="case"/>
+        <property name="param8" value="stockId"/>
+        <property name="uri" value="stock-uri"/>
+        <property name="param-count" value="8"/>
+        <property name="result-key" value="response"/>
+    </activity>
+    <activity name="μs호출 : DeliveryService" class="com.poscoict.glueframework.biz.activity.GlueRestClientActivity">
+        <transition name="success" value="end"/>
+        <property name="method" value="POST"/>
+        <property name="param1" value="command"/>
+        <property name="param2" value="channel"/>
+        <property name="param3" value="userId"/>
+        <property name="param4" value="takeOutId"/>
+        <property name="param5" value="orderId"/>
+        <property name="param6" value="paymentId"/>
+        <property name="param7" value="stockId"/>
+        <property name="param8" value="case"/>
+        <property name="uri" value="delivery-uri"/>
+        <property name="param-count" value="8"/>
+        <property name="result-key" value="response"/>
+    </activity>
+    <activity name="CMD설정:준비" class="com.poscoict.glueframework.biz.activity.GlueInitParamActivity">
+        <transition name="success" value="μs호출 : StockService"/>
+        <property name="param1" value="command::준비"/>
+        <property name="param2" value="channel::stock-channel"/>
+        <property name="param-count" value="2"/>
+    </activity>
+    <activity name="CMD생성:준비취소" class="com.poscoict.glueframework.biz.activity.GlueInitParamActivity">
+        <transition name="success" value="μs호출 : StockService"/>
+        <property name="param1" value="command::준비취소"/>
+        <property name="param2" value="channel::stock-channel"/>
+        <property name="param-count" value="2"/>
+    </activity>
+    <activity name="CMD생성:배송" class="com.poscoict.glueframework.biz.activity.GlueInitParamActivity">
+        <transition name="success" value="μs호출 : DeliveryService"/>
+        <property name="param1" value="command::배송"/>
+        <property name="param2" value="channel::delivery-channel"/>
+        <property name="param-count" value="2"/>
+    </activity>
+</service>

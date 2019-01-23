@@ -41,8 +41,8 @@ public class DeliveryApplication {
 	}
 
 	@Bean
-	@ConditionalOnProperty(value="sample.zipkin.enabled", havingValue="false")
-	public Reporter<Span> spanReporter(){
+	@ConditionalOnProperty(value = "sample.zipkin.enabled", havingValue = "false")
+	public Reporter<Span> spanReporter() {
 		return Reporter.CONSOLE;
 	}
 

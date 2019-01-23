@@ -3,8 +3,10 @@ package com.poscoict.cateringpass.activity;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import com.poscoict.glueframework.biz.activity.GlueActivity;
 import com.poscoict.glueframework.biz.activity.GlueActivityConstants;
@@ -31,30 +33,36 @@ public class SendCommandToMessageBroker extends GlueActivity<GlueContext> {
 	public static final String CHANNEL_NAME = "channel-name";
 	public static final String CHANNEL_CMD_KEY = "channal-cmd-key";
 
-	public String runActivity(GlueContext ctx) {
-		// JmsTemplate jmsTemplate =
-		// super.applicationContext.getBean(JmsTemplate.class);
-		Map<String, Object> jmsMessage = new HashMap<>();
-		// ActiveMQ Queues Name
-		String jmsDestination = ctx.getProperty(DESTINATION, true);
+	@Autowired
+	private RestTemplate restTemplate;
 
-		jmsMessage.put("channel", ctx.getProperty(CHANNEL_NAME, true));
-		jmsMessage.put("command", (String) ctx.get(ctx.getProperty(CHANNEL_CMD_KEY, true)));
-		this.logger.info("큐 : {}", jmsDestination);
-		this.logger.info("채널 : {}", jmsMessage.get("channel"));
-		this.logger.info("CMD : {}", jmsMessage.get("command"));
+	public String runActivity(GlueContext ctx) {
+		// ActiveMQ Queues Name
+		String uri = ctx.getProperty(DESTINATION, true);
+		Map<String, Object> params = new HashMap<>();
+		Object data = params;
+		params.put("command", (String) ctx.get(ctx.getProperty(CHANNEL_CMD_KEY, true)));
+		params.put("channel", ctx.getProperty(CHANNEL_NAME, true));
+
+		//Map<String, Object> jmsMessage = new HashMap<>();
+		//jmsMessage.put("channel", ctx.getProperty(CHANNEL_NAME, true));
+		//jmsMessage.put("command", (String) ctx.get(ctx.getProperty(CHANNEL_CMD_KEY, true)));
+		this.logger.info("URI : {}", uri);
+		this.logger.info("command : {}", params.get("command"));
+		//this.logger.info("채널 : {}", jmsMessage.get("channel"));
 
 		int parameterCount = super.getParamCount(ctx.getProperty("param-count"));
 		for (int i = 0; i < parameterCount; i++) {
 			String param = ctx.getProperty(GlueActivityConstants.PREFIX_ACTIVITY_PROPERTY_PARAM + (i + 1));
 			if (ctx.containsKey(param) && ctx.get(param) != null)
-				jmsMessage.put("extra-" + param, ctx.get(param));
+				params.put("extra-" + param, ctx.get(param));
 		}
 
 		// ActiveMQ(Message Broker)로 메시지보내기
 		// jmsTemplate.convertAndSend(jmsDestination, jmsMessage);
+		restTemplate.postForObject(uri, data, data.getClass(), params);
 
-		ctx.put(super.getResultKey(ctx), jmsMessage);
+		ctx.put(super.getResultKey(ctx), params);
 		return SUCCESS;
 	}
 }
