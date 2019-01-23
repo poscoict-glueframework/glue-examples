@@ -3,6 +3,7 @@ package com.poscoict.cateringpass;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,5 +116,38 @@ public class StrockController {
 		this.logger.info("EventSourcing {}", event);
 		this.logger.info("EventSourcing {}", eventMessage);
 		source.output().send(eventMessage);
+	}
+
+	@PutMapping(path = "/rollback/{testCase}")
+	public void cancelOrder(@PathVariable String testCase, @RequestBody Map<String, String> message) {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		this.logger.info("PUT /rollback/chaining/{}", testCase);
+		for (Entry<String, String> entry : message.entrySet()) {
+			this.logger.info("@RequestBody {}={}", entry.getKey(), entry.getValue());
+		}
+		this.logger.info("{}", tracer.toString());
+		this.logger.info("{}", tracer.currentSpan().toString());
+
+		String stockId = (String) message.get("stockId");
+		Optional<StockJpo> value = this.stockRepository.findById(stockId);
+		if (value.isPresent()) {
+			StockJpo jpo = value.get();
+			jpo.setStatus("재고 취소");
+			this.stockRepository.save(jpo);
+			this.stockHistoryRepository.save(new StockHistoryJpo(jpo));
+		}
+
+		// 3. Event Sourcing : 저장후 보내기
+		Map<String, Object> event = new HashMap<>();
+		event.put("channel-message", "재고 취소");
+		event.putAll(message);
+		Message<?> eventMessage = MessageBuilder.withPayload(event).setHeader("type", "stock-service").build();
+		this.logger.info("EventSourcing {}", event);
+		this.logger.info("EventSourcing {}", eventMessage);
+		this.source.output().send(eventMessage);
 	}
 }
