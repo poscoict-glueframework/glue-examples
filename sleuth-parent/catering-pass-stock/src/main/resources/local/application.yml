@@ -42,3 +42,7 @@ spring:
 sample:
   zipkin:
     enabled: true
+catering:
+  order.base-uri: http://localhost:8081
+  stock.base-uri: http://localhost:8083
+  delivery.base-uri: http://localhost:8084

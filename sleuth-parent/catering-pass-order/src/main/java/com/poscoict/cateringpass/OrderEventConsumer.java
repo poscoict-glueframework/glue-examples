@@ -26,7 +26,7 @@ import com.poscoict.cateringpass.order.OrderRepository;
 public class OrderEventConsumer {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Value("${catering.payment.base-uri:http://localhost:9201}")
+	@Value("${catering.order.base-uri:http://localhost:9201}")
 	private String uri;
 
 	@Autowired
