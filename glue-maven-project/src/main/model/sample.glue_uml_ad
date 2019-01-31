@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Glue:GlueDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Glue="http://www.glueframework.com/activitydiagram/" id="0" location="0,0" size="-1,-1">
+  <child xsi:type="Glue:InitialState" id="1" location="122,23" size="-1,-1" output="//@wire.0"/>
+  <child xsi:type="Glue:FinalState" id="2" location="132,182" size="-1,-1" input="//@wire.1"/>
+  <child xsi:type="Glue:Activity" id="3" location="44,96" size="196,-1" input="//@wire.0" output="//@wire.1" name="조회">
+    <property key="class" value="com.poscoict.sample.activity.Custom_findData"/>
+    <property key="result-key" value="emps"/>
+  </child>
+  <wire id="0" guardcondition="success" firstRelativePoint="132,42" lastRelativePoint="132,96"/>
+  <wire id="1" guardcondition="success" firstRelativePoint="142,126" lastRelativePoint="142,181"/>
+</Glue:GlueDiagram>

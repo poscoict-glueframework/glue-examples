@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="sample-service" initial="조회" xmlns="http://www.poscoict.com/glueframework/service">
+	<activity name="조회" class="com.poscoict.sample.activity.Custom_findData">
+		<transition name="success" value="end" />
+		<property name="result-key" value="emps" />
+	</activity>
+</service>

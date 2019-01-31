@@ -24,6 +24,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
+		<glueframework.version>5.1.1-RELEASE</glueframework.version>
 		<spring.boot.version>2.0.6.RELEASE</spring.boot.version>
 		<spring.cloud.version>Finchley.SR2</spring.cloud.version>
 		<springfox.swagger.version>2.9.2</springfox.swagger.version>
@@ -33,7 +34,7 @@
 		<dependency>
 			<groupId>com.poscoict.glueframework</groupId>
 			<artifactId>glue-core</artifactId>
-			<version>5.1.0-RELEASE</version>
+			<version>${glueframework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -29,10 +29,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- glue-core 추가 -->
 		<dependency>
 			<groupId>com.poscoict.glueframework</groupId>
 			<artifactId>glue-core</artifactId>
-			<version>5.1.0-RELEASE</version>
+			<version>5.1.1-RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -41,6 +43,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<!-- 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -52,10 +56,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	 -->
 
 	<build>
+		<!-- demo-0.0.1-SNAPSHOT.jar 대신에 demo.jar 로 패키징되도록 수정. -->
 		<finalName>demo</finalName>
 		<plugins>
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -63,6 +70,7 @@
 					<generateReports>false</generateReports>
 				</configuration>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

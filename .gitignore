@@ -3,8 +3,8 @@ saga-parent/catering-pass-delivery/application.yml
 saga-parent/catering-pass-order/application.yml
 saga-parent/catering-pass-payment/application.yml
 saga-parent/catering-pass-stock/application.yml
-/target/
-/bin/
+target/
+bin/
 mvnw
 mvnw.cmd
 .mvn/
